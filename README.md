@@ -49,7 +49,7 @@ Select Multiple Startup Projects.
 
 Set both BookingApp.WebAPI and BookingApp.Console to Start.
 
-Press F5.
+Press F5 / Start.
 
 API Documentation
 Once the API is running, you can explore the endpoints at:
@@ -75,8 +75,6 @@ The unit tests cover the core business logic. To run them:
 The tests verify:
 
 Booking creation logic.
-
-Validation of start/end dates.
 
 Proper mapping of Enums within the service layer.
 
