@@ -50,9 +50,6 @@ namespace BookingWeb.API.BLL.Services
 
                 var result = await _bookingRepository.DeleteBookingAsync(id);
 
-                if (!result)
-                    throw new CustomException(HttpStatusCode.InternalServerError, "Failed to delete booking");
-
                 return result;
             }
             catch (Exception ex)
@@ -87,12 +84,12 @@ namespace BookingWeb.API.BLL.Services
             try
             {
                 if (id <= 0)
-                    throw new CustomException(HttpStatusCode.BadRequest, "Invalid product ID");
+                    throw new CustomException(HttpStatusCode.BadRequest, "Invalid Booking ID");
 
                 var booking = await _bookingRepository.GetBookingByIdAsync(id);
 
                 if (booking == null)
-                    throw new CustomException(HttpStatusCode.NotFound, "Product not found");
+                    throw new CustomException(HttpStatusCode.NotFound, "Booking not found");
 
                 return booking;
             }
@@ -109,12 +106,12 @@ namespace BookingWeb.API.BLL.Services
             try
             {
                 if (booking == null)
-                    throw new CustomException(HttpStatusCode.BadRequest, "Product cannot be null");
+                    throw new CustomException(HttpStatusCode.BadRequest, "Booking cannot be null");
 
                 var result = await _bookingRepository.UpdateBookingAsync(booking);
 
                 if (!result)
-                    throw new CustomException(HttpStatusCode.InternalServerError, "Failed to update product");
+                    throw new CustomException(HttpStatusCode.InternalServerError, "Failed to update Booking");
 
                 return result;
             }
