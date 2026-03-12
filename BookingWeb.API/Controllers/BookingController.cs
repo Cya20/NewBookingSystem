@@ -32,7 +32,7 @@ namespace BookingWeb.API.Controllers
         }
 
         [HttpPost("CreateBooking")]
-        public async Task<IActionResult> CreateBookingAsync([FromBody] Booking booking)
+        public async Task<IActionResult> CreateBookingAsync(Booking booking)
         {
             var createdBooking = await _bookingBusinessLogic.CreateBookingAsync(booking);
             return Ok(createdBooking);

@@ -110,9 +110,6 @@ namespace BookingWeb.API.BLL.Services
 
                 var result = await _bookingRepository.UpdateBookingAsync(booking);
 
-                if (!result)
-                    throw new CustomException(HttpStatusCode.InternalServerError, "Failed to update Booking");
-
                 return result;
             }
             catch (Exception ex)
