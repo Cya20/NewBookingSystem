@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Booking.UnitTest/Booking.UnitTest.csproj" Id="82998c31-f51e-421c-beec-64c5f8f97b52" />
+  <Project Path="BookingWeb.API.BLL/BookingWeb.API.BLL.csproj" />
+  <Project Path="BookingWeb.API.DAL/BookingWeb.API.DAL.csproj" />
+  <Project Path="BookingWeb.API/BookingWeb.API.csproj" />
+</Solution>
