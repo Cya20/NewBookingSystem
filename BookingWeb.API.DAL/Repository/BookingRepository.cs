@@ -74,6 +74,7 @@ namespace BookingWeb.API.DAL.Repository
         {
             try
             {
+                //Use IQueryable for better performance and deferred execution
                 var bookings = await _context.Bookings.ToListAsync();
 
                 return bookings;

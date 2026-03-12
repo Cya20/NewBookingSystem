@@ -26,6 +26,9 @@ namespace BookingWeb.API.BLL.Services
                 if (booking == null)
                     throw new CustomException(HttpStatusCode.BadRequest, "Booking cannot be null");
 
+                if(booking.StartDate > booking.EndDate)
+                    throw new CustomException(HttpStatusCode.BadRequest, "Start date cannot be after end date");
+
                 var result = await _bookingRepository.AddBookingAsync(booking);
 
                 if (!result)
@@ -64,7 +67,7 @@ namespace BookingWeb.API.BLL.Services
         {
             try
             {
-                IEnumerable<Booking> bookings = await _bookingRepository.GetAllBookingsAsync();
+                var  bookings = await _bookingRepository.GetAllBookingsAsync();
 
                 if (bookings == null || !bookings.Any())
                     throw new CustomException(HttpStatusCode.NotFound, "No bookings found");
@@ -107,6 +110,9 @@ namespace BookingWeb.API.BLL.Services
             {
                 if (booking == null)
                     throw new CustomException(HttpStatusCode.BadRequest, "Booking cannot be null");
+
+                if (booking.StartDate > booking.EndDate)
+                    throw new CustomException(HttpStatusCode.BadRequest, "Start date cannot be after end date");
 
                 var result = await _bookingRepository.UpdateBookingAsync(booking);
 
