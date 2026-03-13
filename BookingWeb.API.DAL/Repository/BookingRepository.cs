@@ -3,6 +3,7 @@ using BookingWeb.API.DAL.IRepository;
 using BookingWeb.API.DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,15 +31,15 @@ namespace BookingWeb.API.DAL.Repository
             }
             catch (SqlException sqlex)
             {
-                //log.Error($"SQL Exception occurred while adding a booking: {sqlex.Message}");
-                //Grafana or file logs
+                Log.Error($"SQL Exception occurred while adding a booking: {sqlex.Message}");
+                //I would write the logs to Grafana, OpenTelemetry
                 return false;
                 // Log the exception (sqlex) here
             }
             catch (Exception ex)
             {
-                //log.Error($"Exception occurred while adding a booking: {ex.Message}");
-                //Grafana or file logs
+                Log.Error($"Exception occurred while adding a booking: {ex.Message}");
+                //I would write the logs to Grafana, OpenTelemetry
                 return false;
                 //throw;
             }
@@ -64,8 +65,8 @@ namespace BookingWeb.API.DAL.Repository
             }
             catch (Exception ex)
             {
-                //log.Error($"Exception occurred while deleting booking: {ex.Message}");
-                //Grafana or file logs
+                Log.Error($"Exception occurred while deleting booking: {ex.Message}");
+                //I would write the logs to Grafana, OpenTelemetry
                 return false;
             }
         }
@@ -74,15 +75,16 @@ namespace BookingWeb.API.DAL.Repository
         {
             try
             {
-                //Use IQueryable for better performance and deferred execution
+                //I need to use use IQueryable for better performance and deferred execution
                 var bookings = await _context.Bookings.ToListAsync();
 
                 return bookings;
             }
             catch (Exception ex)
             {
-                //log.Error($"Exception occurred while retrieving all a booking: {ex.Message}");
-                //Grafana or file logs
+                
+                Log.Error($"Exception occurred while retrieving all a booking: {ex.Message}");
+                //I would write the logs to Grafana, OpenTelemetry
                 throw;
             }
         }
@@ -97,8 +99,8 @@ namespace BookingWeb.API.DAL.Repository
             }
             catch (Exception ex)
             {
-                //log.Error($"Exception occurred while retrieving a booking: {ex.Message}");
-                //Grafana or file logs
+                Log.Error($"Exception occurred while retrieving a booking: {ex.Message}");
+                //I would write the logs to Grafana, OpenTelemetry
                 throw;
             }
         }
@@ -126,8 +128,8 @@ namespace BookingWeb.API.DAL.Repository
             }
             catch (Exception ex)
             {
-                //log.Error($"Exception occurred while updating booking: {ex.Message}");
-                //Grafana or file logs
+                Log.Error($"Exception occurred while updating booking: {ex.Message}");
+                //I would write the logs to Grafana, OpenTelemetry
                 return false;
                 //throw;
             }
