@@ -30,7 +30,8 @@ var newBooking = new Booking
     ItemType = Enum.TryParse<BookingItemType>(itemType, true, out var parsedItemType) ? parsedItemType : BookingItemType.Apartment, 
     ItemName = itemName,
     StartDate = DateTime.TryParse(bookingDateInput, out var parsedDate) ? parsedDate : DateTime.Now ,
-    EndDate = DateTime.TryParse(bookingDateInput, out var parsedEndDate) ? parsedEndDate.AddDays(7) : DateTime.Now.AddDays(7)
+    EndDate = DateTime.TryParse(bookingDateInput, out var parsedEndDate) ? parsedEndDate.AddDays(7) : DateTime.Now.AddDays(7),
+    ActiveBooking = true
 };
 
 await CreateBookingAsync(newBooking);
@@ -40,9 +41,9 @@ var updateResponse = Console.ReadLine();
 
 if(!string.IsNullOrEmpty(updateResponse) && string.Equals(updateResponse, "Y", StringComparison.OrdinalIgnoreCase))
 {
+    Console.WriteLine("Current Bookings: ");
     var bookings = await GetAllBookingsAsync();
 
-    Console.WriteLine("Current Bookings: ");
     foreach (var booking in bookings)
     {
         Console.WriteLine($"ID: {booking.Id}, Customer: {booking.CustomerName}, Item: {booking.ItemName}, Type: {booking.ItemType}, Start: {booking.StartDate.ToShortDateString()}, End: {booking.EndDate.ToShortDateString()}");
@@ -143,7 +144,7 @@ async Task<bool> UpdateBookingAsync(Booking booking)
     }
 }
 
-async Task<IEnumerable<Booking>> GetAllBookingsAsync()
+async Task<List<Booking>> GetAllBookingsAsync()
 {
     try
     {
