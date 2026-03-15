@@ -71,18 +71,35 @@ namespace BookingWeb.API.DAL.Repository
             }
         }
 
-        public async Task<IEnumerable<Booking>> GetAllBookingsAsync()
+        public IQueryable<Booking> GetAllBookingsAsync()
         {
             try
             {
-                //I need to use use IQueryable for better performance and deferred execution
-                var bookings = await _context.Bookings.ToListAsync();
+                
+                var bookings =  _context.Bookings.Where(b => b.ActiveBooking == true);
 
                 return bookings;
             }
             catch (Exception ex)
             {
                 
+                Log.Error($"Exception occurred while retrieving all a booking: {ex.Message}");
+                //I would write the logs to Grafana, OpenTelemetry
+                throw;
+            }
+        }
+
+        public async Task<List<Booking>> GetAllActiveBookingsAsync()
+        {
+            try
+            {
+                IQueryable<Booking> activeBookingsQuery = GetAllBookingsAsync();
+
+                return await activeBookingsQuery.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
                 Log.Error($"Exception occurred while retrieving all a booking: {ex.Message}");
                 //I would write the logs to Grafana, OpenTelemetry
                 throw;

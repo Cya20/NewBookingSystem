@@ -24,6 +24,8 @@ namespace BookingWeb.API.DAL.Models
 
         [Required]
         public DateTime EndDate { get; set; }
+
+        public bool ActiveBooking { get; set; }
     }
 
     public enum BookingItemType

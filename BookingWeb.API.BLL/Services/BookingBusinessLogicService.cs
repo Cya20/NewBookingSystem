@@ -63,11 +63,11 @@ namespace BookingWeb.API.BLL.Services
         }
 
 
-        public async Task<IEnumerable<Booking>> GetAllBookingsAsync()
+        public async Task<List<Booking>> GetAllBookingsAsync()
         {
             try
             {
-                var  bookings = await _bookingRepository.GetAllBookingsAsync();
+                var  bookings = await _bookingRepository.GetAllActiveBookingsAsync();
 
                 if (bookings == null || !bookings.Any())
                     throw new CustomException(HttpStatusCode.NotFound, "No bookings found");

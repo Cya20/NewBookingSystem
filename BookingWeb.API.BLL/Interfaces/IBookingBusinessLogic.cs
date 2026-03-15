@@ -7,7 +7,7 @@ namespace BookingWeb.API.BLL.Interfaces
 {
     public interface IBookingBusinessLogic
     {
-        Task<IEnumerable<Booking>> GetAllBookingsAsync();
+        Task<List<Booking>> GetAllBookingsAsync();
         Task<Booking> GetBookingByIdAsync(int id);
         Task<bool> UpdateBookingAsync(Booking booking);
         Task<bool> DeleteBookingAsync(int id);
